@@ -1,0 +1,49 @@
+cabal-version: 2.2
+name:
+  rtq
+version:
+  0.1
+author:
+  Edsko de Vries
+  chessai
+maintainer:
+  chessai <chessai1996@gmail.com>
+license:
+  BSD-3-Clause
+license-file:
+  LICENSE
+build-type:
+  Simple
+
+library
+  hs-source-dirs:
+    src
+  exposed-modules:
+    Rtq
+    Rtq.Internal
+  build-depends:
+    , base >= 4.14 && < 4.17
+  default-language:
+    Haskell2010
+
+--test-suite test
+--  import:
+--    shared-properties
+--  type:
+--    exitcode-stdio-1.0
+--  hs-source-dirs:
+--    test
+--  main-is:
+--    Main.hs
+--  other-modules:
+--    Gen
+--    Property
+--    Unit
+--  build-depends:
+--    , base
+--    , hedgehog
+--    , hedgehog-classes
+--    , rtq
+--    , tasty
+--    , tasty-hedgehog
+--    , tasty-hunit

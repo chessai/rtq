@@ -1,0 +1,7 @@
+packages:
+  .
+
+tests: true
+test-show-details: direct
+
+write-ghc-environment-files: never
