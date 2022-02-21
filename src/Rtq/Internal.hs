@@ -25,7 +25,7 @@ module Rtq.Internal
   , pop
   , head
   , size
-  , map
+  , Rtq.Internal.map
   , fromList
   , toList
   )
