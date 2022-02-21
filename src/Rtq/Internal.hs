@@ -199,11 +199,12 @@ mapFB c f = \x ys -> c (f x) ys
 "map queue" [1]  forall f.   foldr (mapFB push f) empty = map f
 -}
 
+-- map id = id rule eta-expands id, because id is very likely to inline first
 {-# RULES
 "toList . fromList = id" [1] forall q. toList (fromList q) = q
 
-"map coerce = coerce" [1] map coerce = coerce
-"map id = id"         [1] map id     = id
+"map coerce = coerce" [1] Rtq.Internal.map coerce    = coerce
+"map id = id"         [1] Rtq.Internal.map (\x -> x) = id
 #-}
 
 
