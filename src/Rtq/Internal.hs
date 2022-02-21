@@ -68,7 +68,7 @@ instance (Read a) => Read (Queue a) where
   readListPrec = readListPrecDefault
 
 instance Functor Queue where
-  fmap = map
+  fmap = Rtq.Internal.map
   {-# inline fmap #-}
 
 instance Foldable Queue where
