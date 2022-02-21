@@ -23,7 +23,7 @@ module Rtq.Internal
   , singleton
   , push
   , pop
-  , head
+  , Rtq.Internal.head
   , size
   , Rtq.Internal.map
   , fromList
