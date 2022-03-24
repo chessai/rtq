@@ -42,7 +42,6 @@ import "base" Text.Read (ReadPrec, Lexeme(Ident), readPrec, readListPrec, readLi
 
 data Queue a = Queue !Int [a] !Int !(SpineStrictList a) !Progress
   deriving stock (Generic)
-  deriving stock (Traversable)
 type role Queue representational
 
 instance (Eq a) => Eq (Queue a) where
@@ -70,10 +69,6 @@ instance (Read a) => Read (Queue a) where
 instance Functor Queue where
   fmap = Rtq.Internal.map
   {-# inline fmap #-}
-
-instance Foldable Queue where
-  foldMap k (Queue _ xs _ ys _) = foldMap k xs <> foldMap k ys
-  {-# inline foldMap #-}
 
 empty :: Queue a
 empty = Queue 0 [] 0 Nil Done
@@ -107,8 +102,6 @@ map :: (a -> b) -> Queue a -> Queue b
 map m (Queue f xs r ys p) = Queue f (List.map m xs) r (fmap m ys) p
 {-# noinline [0] map #-}
 
---traverse :: (Applicative f) => (a -> f b) -> Queue a -> f (Queue b)
---traverse m (Queue f xs r ys p) =
 fromList :: [a] -> Queue a
 fromList = List.foldl' (flip push) empty
 {-# inline [0] fromList #-}
@@ -186,7 +179,7 @@ runDelay = \xs -> runST $ do
 appPrec :: Int
 appPrec = 10
 
--- Commented out for now: fusion might disturb optimisations from inling push
+-- Commented out for now: fusion might disturb optimisations from inlining push
 {-
 build :: forall a. (forall b. (a -> b -> b) -> b -> b) -> Queue a
 build g = g push empty
